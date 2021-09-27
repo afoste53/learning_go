@@ -1,22 +1,19 @@
 package greetings
 
-import "fmt"
-
-
-/**
-func Hello(name string) string
- 	^ func  ^name   ^var    ^return type
-        name   of var  type
- function that starts with capital letter can be called by a function
- not in the same package - an exported name **/
+import(
+	"errors"
+	"fmt"
+)
 
 // Hello returns a greeting for the named person
-func Hello(name string) string {
-   // return a greeting that embeds the name in a message
-   message := fmt.Sprintf("Hi, %v. Welcome!", name)
-   /** 
-	:= decalres and initializes variable in same line
-	Sprintf replaces %v with specified variable
-    **/
-    return message
+func Hello(name string) (string, error) {
+	// if no name is provided, return an error
+	if name == "" {
+		return "", errors.New("empty name")
+	}
+
+	// if a name was received, return valie that embeds name
+	// in a greeting message
+	message := fmt.Sprintf("Hi, %v. Welcome!", name)
+	return message, nil
 }
